@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('rsa-encryption')->get('/hello', function (Request $request) {
-    return "hello";
+
+Route::middleware(['rsa-encryption','auth:sanctum'])->get('/hello', function (Request $request) {
+    return response()->json([
+        'data' => [
+            'message' => 'Success',
+            'key' => Str::random(300)
+        ]
+    ]);
+});
+
+Route::get('server-key',function (){
+    return response()->json([
+        'message' => 'Success',
+        'key' => Storage::get('public.pem')
+    ]);
 });

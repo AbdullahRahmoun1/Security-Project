@@ -3,6 +3,8 @@
 /public/build
 /public/hot
 /public/storage
+!/public/storage/app/public.pem
+!/public/storage/app/private.pem
 /storage/*.key
 /vendor
 .env

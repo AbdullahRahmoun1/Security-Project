@@ -37,6 +37,7 @@ class RsaEncryptionMiddleware
 
         // Request processing
         $response = $next($request);
+        dd($response);
         // Second Layer: Encrypt response data using user's public key
         $user = request()->user();
         if(!$user && !request('public_key')){

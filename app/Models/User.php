@@ -29,15 +29,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         // 'username' => 'encrypted',
+        'balance'   => 'encrypted' ,
+        'public_key'=> 'encrypted' ,
     ];
     protected $with = [
         'rsaPublicKeys'
     ];
-    protected $encrypted = [
-        'username',
-        'balance',
-        'public_key',
-    ];
+  
 
     public function rsaPublicKeys($auth_token=null){
         return $this->hasMany(RsaPublicKey::class)

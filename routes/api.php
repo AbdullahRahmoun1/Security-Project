@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::middleware(['auth:sanctum', 'rsa-encryption'])->group(function () {
             'request_body' => request()->all()
         ];
     });
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
+    Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
 });
 Route::get('server-key', function () {
     return response()->json([
@@ -38,3 +43,6 @@ Route::get('server-key', function () {
         'key' => Storage::get('public.pem')
     ]);
 });
+
+
+

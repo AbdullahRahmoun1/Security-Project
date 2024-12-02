@@ -9,6 +9,9 @@ class RsaPublicKey extends Model
 {
     use HasFactory;
     protected $table = 'rsa_public_keys';
+    protected $casts = [
+        'key'   => 'encrypted' ,
+    ];
     protected $fillable = [
         'key',
         'user_id',

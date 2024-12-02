@@ -14,6 +14,7 @@ class RsaEncryptionMiddleware
         if (!$request->has('encryptedData')) {
             return response()->json(['message' => 'Encrypted data is required'], 400);
         }
+
         // First Layer: Decrypt incoming encrypted data using server's private key
         $serverPrivateKey = Storage::get('private.pem');
         if (!$serverPrivateKey) {

@@ -15,6 +15,15 @@ if(!function_exists('user')){
         return $user;
     }
 }
+if(!function_exists('decompressString')){
+    function decompressString($compressedString) {
+        // Decode the Base64 string
+        $compressedBytes = base64_decode($compressedString);
+        // Decompress the zlib-compressed bytes
+        $originalString = gzuncompress($compressedBytes);
+        return $originalString;
+    }
+}
 
 
 if (!function_exists('array_dot')) {

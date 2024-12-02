@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Encryptable;
+use Exception;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,7 +37,20 @@ class User extends Authenticatable
     protected $with = [
         'rsaPublicKeys'
     ];
-  
+
+    public function publicKey():Attribute{
+        return Attribute::make(
+            set: function($value){
+                try {
+                    // Decode and decompress
+                    $originalString = decompressString($value);
+                    return $originalString;
+                } catch (Exception $e) {
+                    throwError("Failed to decompress public_key");
+                }
+            }
+        );
+    }
 
     public function rsaPublicKeys($auth_token=null){
         return $this->hasMany(RsaPublicKey::class)

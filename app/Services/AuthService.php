@@ -18,6 +18,7 @@ class AuthService
         $user = User::create($data);
         $tokenData=$this->validateCountAndCreateToken($user);
         $this->rsaPublicKeyService->attachToOwner($user, $data['public_key'],$user->tokens->first());
+        $user->refresh();
         return [
             'user' => $user,
         ]+$tokenData;

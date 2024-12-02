@@ -15,13 +15,13 @@ if(!function_exists('user')){
         return $user;
     }
 }
-if(!function_exists('decompressString')){
-    function decompressString($compressedString) {
-        // Decompress the zlib-compressed bytes
-        $originalString = gzuncompress($compressedString);
-        return $originalString;
-    }
-}
+// if(!function_exists('decompressString')){
+//     function decompressString($compressedString) {
+//         return $compressedString;
+//         // Decompress the zlib-compressed bytes
+//         // $originalString = gzuncompress($compressedString);
+//     }
+// }
 
 
 if (!function_exists('array_dot')) {

@@ -38,19 +38,19 @@ class User extends Authenticatable
         'rsaPublicKeys'
     ];
 
-    public function publicKey():Attribute{
-        return Attribute::make(
-            set: function($value){
-                try {
-                    // Decode and decompress
-                    $originalString = decompressString($value);
-                    return $originalString;
-                } catch (Exception $e) {
-                    throwError("Failed to decompress public_key");
-                }
-            }
-        );
-    }
+    // public function publicKey():Attribute{
+    //     return Attribute::make(
+    //         set: function($value){
+    //             try {
+    //                 // Decode and decompress
+    //                 $originalString = decompressString($value);
+    //                 return $originalString;
+    //             } catch (Exception $e) {
+    //                 throwError("Failed to decompress public_key");
+    //             }
+    //         }
+    //     );
+    // }
 
     public function rsaPublicKeys($auth_token=null){
         return $this->hasMany(RsaPublicKey::class)

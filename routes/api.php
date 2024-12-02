@@ -24,7 +24,8 @@ Route::prefix('auth')
         Route::post('login','login');
         Route::post('register','register');
     });
-Route::middleware(['auth:sanctum', 'rsa-encryption'])->group(function () {
+
+Route::middleware([ ])->group(function () {
     //other routers here
     Route::get('example', function(){
         return [
@@ -32,11 +33,14 @@ Route::middleware(['auth:sanctum', 'rsa-encryption'])->group(function () {
             'request_body' => request()->all()
         ];
     });
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{id}', [UserController::class, 'show']);
-    Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
-    Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
+ 
+    // Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
 });
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
+Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
+
 Route::get('server-key', function () {
     return response()->json([
         'message' => 'Success',

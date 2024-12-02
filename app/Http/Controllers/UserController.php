@@ -68,15 +68,13 @@ public function getTransactions(Request $request, $id)
     $validated = $request->validate([
         'per_page' => 'sometimes|integer|min:1|max:50', 
     ]);
-    $perPage = $validated['per_page'] ?? 15; 
+    $perPage = $validated['per_page'] ?? 5; 
     $user = User::findOrFail($id);
-    $transactions = $user->transactions()->paginate($perPage);
+    $transactions = $user->transactions()->simplePaginate($perPage);
     return response()->json([
         'success' => true,
         'message' => 'Success.',
         'data' => $transactions,
     ]);
 }
-
-
 }

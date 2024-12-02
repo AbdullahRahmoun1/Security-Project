@@ -57,4 +57,8 @@ class User extends Authenticatable
         return $this->hasMany(RsaPublicKey::class)
         ->when($auth_token,fn($q)=>$q->where('auth_token',$auth_token));
     }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class)
+;    }
 }

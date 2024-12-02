@@ -20,5 +20,13 @@ Route::middleware('rsa-encryption')->get('/hello', function (Request $request) {
 });
 
 // Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/users/{id}', [UserController::class, 'show']);
+    // Route::get('/users/{id}', [UserController::class, 'show']);
 // });
+
+
+Route::middleware(['rsa-encryption', 'auth:sanctum'])->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
+    Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
+});

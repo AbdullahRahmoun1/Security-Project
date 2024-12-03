@@ -34,16 +34,16 @@ Route::middleware([ ])->group(function () {
         ];
     });
     //with encryption
-    // Route::get('/users', [UserController::class, 'index']);
-    // Route::get('/users/{id}', [UserController::class, 'show']);
-    // Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
-    // Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
-});
-    //without encryption
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
     Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
     Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
+});
+    //without encryption
+    // Route::get('/users', [UserController::class, 'index']);
+    // Route::get('/users/{id}', [UserController::class, 'show']);
+    // Route::put('/users/{id}/balance', [UserController::class, 'updateBalance']);
+    // Route::get('/users/{id}/transactions', [UserController::class, 'getTransactions']);
 
     Route::get('server-key', function () {
     return response()->json([

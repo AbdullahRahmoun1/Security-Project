@@ -42,8 +42,11 @@ class RsaEncryptionMiddleware
         if(!$user && !request('public_key')){
             return response()->json(['message' => 'Encryption failed: cant find a public_key to encrypt the data with it'], 400);
         }
-        $userPublicKey = $user?->rsaPublicKeys($user->currentAccessToken()->token)?->first()?->key??(request('public_key'));
-        // dd($response->content());
+        if($user){
+            $userPublicKey = $user?->rsaPublicKeys($user->currentAccessToken()->token)->first();
+        }else{
+            $userPublicKey = request('public_key');
+        }
         if ($userPublicKey) {
             $responseContent =$response->getContent();
             // dd($responseContent);
